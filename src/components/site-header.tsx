@@ -12,7 +12,7 @@ const links = [{ href: "/shop", label: "Shop" }, { href: "/about", label: "Our s
 export function SiteHeader({ announcement = "Gifts made personal. Orders confirmed on WhatsApp." }: { announcement?: string }) {
   return (
     <>
-      <div className="bg-[#26231f] px-4 py-2.5 text-center text-[0.67rem] font-medium uppercase tracking-[0.2em] text-white/85">{announcement}</div>
+      <div className="bg-[#26231f] px-4 py-2.5 text-center text-[0.62rem] font-medium uppercase leading-5 tracking-[0.16em] text-white/85 sm:text-[0.67rem] sm:tracking-[0.2em]">{announcement}</div>
       <header className="sticky top-0 z-40 border-b border-border/80 bg-background/92 backdrop-blur-xl">
         <div className="container-site flex h-[76px] items-center justify-between gap-4">
           <BrandLogo />
@@ -24,9 +24,9 @@ export function SiteHeader({ announcement = "Gifts made personal. Orders confirm
             <CartDrawer />
             <Sheet>
               <SheetTrigger render={<Button variant="ghost" className="size-10 rounded-full lg:hidden" />}><Menu /><span className="sr-only">Open menu</span></SheetTrigger>
-              <SheetContent className="border-l border-border bg-background sm:max-w-sm">
+              <SheetContent className="data-[side=right]:w-full border-l border-border bg-background sm:max-w-sm">
                 <SheetTitle className="font-heading text-3xl font-medium">Menu</SheetTitle>
-                <nav className="mt-10 flex flex-col gap-1 px-4">{links.map((link) => <Link key={link.href} href={link.href} className="border-b border-border py-4 font-heading text-3xl font-medium">{link.label}</Link>)}</nav>
+                <nav className="mt-8 flex flex-col gap-1 px-4">{links.map((link) => <Link key={link.href} href={link.href} className="flex min-h-14 items-center border-b border-border font-heading text-3xl font-medium">{link.label}</Link>)}</nav>
               </SheetContent>
             </Sheet>
           </div>

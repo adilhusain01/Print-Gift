@@ -35,13 +35,13 @@ export function ProductGallery({ images, name }: { images: string[]; name: strin
         ) : null}
       </div>
       {gallery.length > 1 ? (
-        <div className="mt-3 grid grid-cols-5 gap-2 sm:grid-cols-6">
+        <div className="-mx-5 mt-3 flex gap-2 overflow-x-auto px-5 pb-1 sm:mx-0 sm:px-0">
           {gallery.map((image, index) => (
             <button
               type="button"
               key={`${image}-${index}`}
               onClick={() => setActiveIndex(index)}
-              className={`relative aspect-square overflow-hidden rounded-md border-2 transition-colors ${activeIndex === index ? "border-foreground" : "border-transparent hover:border-border"}`}
+              className={`relative size-16 shrink-0 overflow-hidden rounded-md border-2 transition-colors sm:size-[4.5rem] ${activeIndex === index ? "border-foreground" : "border-transparent hover:border-border"}`}
               aria-label={`View product image ${index + 1}`}
               aria-pressed={activeIndex === index}
             >
