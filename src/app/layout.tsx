@@ -7,7 +7,7 @@ const display = Cormorant_Garamond({ variable: "--font-display", subsets: ["lati
 const body = Manrope({ variable: "--font-body", subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://printngift.store"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://www.printngift.store"),
   title: { default: "PrintnGift | Gifts worth remembering", template: "%s | PrintnGift" },
   description: "Thoughtful, personalized gifts made for birthdays, milestones, and ordinary days worth celebrating.",
   icons: {
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "PrintnGift",
     description: "Gifts worth remembering.",
-    url: "https://printngift.store",
+    url: "https://www.printngift.store",
     siteName: "PrintnGift",
     images: [{ url: "/logo.png", width: 320, height: 309, alt: "PrintnGift" }],
     type: "website",

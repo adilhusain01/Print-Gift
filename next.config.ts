@@ -4,16 +4,6 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: process.cwd(),
   },
-  async redirects() {
-    return [
-      {
-        source: "/:path*",
-        has: [{ type: "host", value: "www.printngift.store" }],
-        destination: "https://printngift.store/:path*",
-        permanent: true,
-      },
-    ];
-  },
   images: {
     remotePatterns: [
       {
