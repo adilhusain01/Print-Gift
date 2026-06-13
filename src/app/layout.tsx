@@ -8,7 +8,7 @@ const body = Manrope({ variable: "--font-body", subsets: ["latin"] });
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://www.printngift.store"),
-  title: { default: "PrintnGift | Gifts worth remembering", template: "%s | PrintnGift" },
+  title: { default: "PrintNGift | Gifts worth remembering", template: "%s | PrintNGift" },
   description: "Thoughtful, personalized gifts made for birthdays, milestones, and ordinary days worth celebrating.",
   icons: {
     icon: "/favicon.ico",
@@ -16,11 +16,11 @@ export const metadata: Metadata = {
     apple: "/logo.png",
   },
   openGraph: {
-    title: "PrintnGift",
+    title: "PrintNGift",
     description: "Gifts worth remembering.",
     url: "https://www.printngift.store",
-    siteName: "PrintnGift",
-    images: [{ url: "/logo.png", width: 320, height: 309, alt: "PrintnGift" }],
+    siteName: "PrintNGift",
+    images: [{ url: "/logo.png", width: 320, height: 309, alt: "PrintNGift" }],
     type: "website",
   },
 };

@@ -15,7 +15,7 @@ export function CartDrawer() {
 
   return (
     <Sheet>
-      <SheetTrigger render={<Button variant="ghost" className="relative size-10 rounded-full" />}>
+      <SheetTrigger render={<Button variant="ghost" className="relative size-11 rounded-full" />}>
           <ShoppingBag className="size-5" />
           {count > 0 ? <span className="absolute right-0 top-0 grid size-5 place-items-center rounded-full bg-primary text-[0.6rem] font-semibold text-primary-foreground">{count}</span> : null}
           <span className="sr-only">Open cart</span>

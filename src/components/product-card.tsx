@@ -27,7 +27,7 @@ export function ProductCard({ product }: { product: Product }) {
         ) : null}
         <Button
           size="icon"
-          className="absolute bottom-3 right-3 size-10 rounded-full bg-white text-foreground opacity-100 shadow-sm transition-all hover:bg-primary hover:text-primary-foreground sm:translate-y-2 sm:opacity-0 sm:group-hover:translate-y-0 sm:group-hover:opacity-100"
+          className="absolute bottom-3 right-3 size-11 rounded-full bg-white text-foreground opacity-100 shadow-sm transition-[color,background-color,transform,opacity] hover:bg-primary hover:text-primary-foreground motion-reduce:transition-none sm:translate-y-2 sm:opacity-0 sm:group-hover:translate-y-0 sm:group-hover:opacity-100"
           onClick={(event) => {
             event.preventDefault();
             add(product);

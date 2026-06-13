@@ -35,7 +35,7 @@ export async function POST(request: Request) {
     const shipping = subtotal >= settings.freeShippingThreshold ? 0 : settings.shippingFee;
     const now = new Date().toISOString();
     const order: Order = {
-      orderNumber: `PNG-${new Date().toISOString().slice(2, 10).replaceAll("-", "")}-${crypto.randomUUID().slice(0, 4).toUpperCase()}`,
+      orderNumber: `ORD-${new Date().toISOString().slice(2, 10).replaceAll("-", "")}-${crypto.randomUUID().slice(0, 4).toUpperCase()}`,
       items,
       customer: parsed.data.customer,
       subtotal,
@@ -52,7 +52,7 @@ export async function POST(request: Request) {
     }
 
     const lines = [
-      `Hello PrintnGift, I just placed order *${order.orderNumber}*.`,
+      `Hello PrintNGift, I just placed order *${order.orderNumber}*.`,
       "",
       ...order.items.map((item) => `• ${item.name} × ${item.quantity} — ₹${item.price * item.quantity}`),
       "",

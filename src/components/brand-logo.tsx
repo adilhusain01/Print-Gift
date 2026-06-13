@@ -12,7 +12,7 @@ export function BrandLogo({
     <Link
       href="/"
       className="group inline-flex items-center gap-3"
-      aria-label="PrintnGift home"
+      aria-label="PrintNGift home"
     >
       <Image
         src="/logo.png"
@@ -26,7 +26,7 @@ export function BrandLogo({
         <span
           className={`font-heading text-[1.35rem] font-semibold tracking-[0.03em] ${inverse ? "text-white" : "text-foreground"}`}
         >
-          Print&Gift
+          PrintNGift
         </span>
       )}
     </Link>

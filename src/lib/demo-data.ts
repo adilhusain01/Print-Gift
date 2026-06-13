@@ -104,7 +104,7 @@ export const demoSettings: StoreSettings = {
 
 export const demoOrders: Order[] = [
   {
-    orderNumber: "PNG-260614-A1B2",
+    orderNumber: "ORD-260614-A1B2",
     items: [{ ...demoProducts[0], quantity: 1 }],
     customer: {
       name: "Demo Customer",

@@ -55,7 +55,7 @@ export default async function Home() {
               <p className="mt-2 text-xs leading-5 text-muted-foreground">Share the details at checkout. We confirm the final direction with you on WhatsApp.</p>
             </div>
             <div className="absolute right-0 top-16 h-28 w-px bg-foreground/30" />
-            <p className="absolute right-[-2.5rem] top-48 hidden rotate-90 text-[0.62rem] font-semibold uppercase tracking-[0.28em] text-muted-foreground xl:block">The PrintnGift edit</p>
+            <p className="absolute right-[-2.5rem] top-48 hidden rotate-90 text-[0.62rem] font-semibold uppercase tracking-[0.28em] text-muted-foreground xl:block">The PrintNGift edit</p>
           </div>
         </div>
       </section>

@@ -3,7 +3,7 @@ import { ShopCatalog } from "@/components/shop-catalog";
 import { StoreShell } from "@/components/store-shell";
 import { getProducts } from "@/lib/data";
 
-export const metadata: Metadata = { title: "Shop gifts", description: "Browse thoughtful and personalized gifts from PrintnGift." };
+export const metadata: Metadata = { title: "Shop gifts", description: "Browse thoughtful and personalized gifts from PrintNGift." };
 
 export default async function ShopPage({ searchParams }: { searchParams: Promise<{ category?: string }> }) {
   const [products, params] = await Promise.all([getProducts(), searchParams]);

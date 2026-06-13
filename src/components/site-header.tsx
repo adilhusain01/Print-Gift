@@ -23,7 +23,7 @@ export function SiteHeader({ announcement = "Gifts made personal. Orders confirm
             <Button nativeButton={false} render={<Link href="/shop" />} className="brutal-button hidden h-10 bg-primary px-5 text-primary-foreground sm:inline-flex">Explore gifts</Button>
             <CartDrawer />
             <Sheet>
-              <SheetTrigger render={<Button variant="ghost" className="size-10 rounded-full lg:hidden" />}><Menu /><span className="sr-only">Open menu</span></SheetTrigger>
+              <SheetTrigger render={<Button variant="ghost" className="size-11 rounded-full lg:hidden" />}><Menu /><span className="sr-only">Open menu</span></SheetTrigger>
               <SheetContent className="data-[side=right]:w-full border-l border-border bg-background sm:max-w-sm">
                 <SheetTitle className="font-heading text-3xl font-medium">Menu</SheetTitle>
                 <nav className="mt-8 flex flex-col gap-1 px-4">{links.map((link) => <Link key={link.href} href={link.href} className="flex min-h-14 items-center border-b border-border font-heading text-3xl font-medium">{link.label}</Link>)}</nav>

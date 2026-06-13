@@ -53,7 +53,7 @@
     background-image: linear-gradient(to bottom, rgb(255 255 255 / 0.24), transparent 22rem);
   }
   h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 500; }
-  button, a { @apply focus-visible:outline-2 focus-visible:outline-offset-2; }
+  button, a { @apply touch-manipulation focus-visible:outline-2 focus-visible:outline-offset-2; }
   ::selection { background: #d8d3c3; color: #26231f; }
 }
 
@@ -65,6 +65,6 @@
   .surface { @apply rounded-xl border border-border bg-card shadow-[0_12px_40px_rgb(38_35_31/0.05)]; }
   .brutal-box { @apply rounded-xl border border-border bg-card shadow-[0_12px_40px_rgb(38_35_31/0.05)]; }
   .brutal-box-sm { @apply rounded-lg border border-border bg-card shadow-[0_8px_24px_rgb(38_35_31/0.04)]; }
-  .brutal-button { @apply rounded-full border border-transparent shadow-none transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgb(38_35_31/0.12)] active:translate-y-0 active:shadow-none; }
+  .brutal-button { @apply rounded-full border border-transparent shadow-none transition-[transform,box-shadow,background-color,color,border-color] duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgb(38_35_31/0.12)] active:translate-y-0 active:shadow-none motion-reduce:transition-none; }
   .field { @apply rounded-lg border border-border bg-white/70 shadow-none transition-colors focus-visible:border-foreground/50 focus-visible:ring-2 focus-visible:ring-ring/15; }
 }

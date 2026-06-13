@@ -1,4 +1,4 @@
-# PrintnGift
+# PrintNGift
 
 Modern gift commerce storefront and merchant CMS for
 [printngift.store](https://printngift.store).
@@ -33,7 +33,7 @@ npm run dev
 ```bash
 curl -X POST http://localhost:3000/api/auth/sign-up/email \
   -H "Content-Type: application/json" \
-  -d '{"name":"PrintnGift Owner","email":"owner@printngift.store","password":"YOUR_STRONG_PASSWORD"}'
+  -d '{"name":"PrintNGift Owner","email":"owner@printngift.store","password":"YOUR_STRONG_PASSWORD"}'
 ```
 
 Then sign in at `http://localhost:3000/admin`.
@@ -70,7 +70,7 @@ when creating the account and is not stored as an environment variable.
 ```bash
 curl -X POST https://www.printngift.store/api/auth/sign-up/email \
   -H "Content-Type: application/json" \
-  -d '{"name":"PrintnGift Owner","email":"owner@printngift.store","password":"YOUR_STRONG_PASSWORD"}'
+  -d '{"name":"PrintNGift Owner","email":"owner@printngift.store","password":"YOUR_STRONG_PASSWORD"}'
 ```
 
 Keep `ADMIN_EMAIL` set in production; it prevents other email addresses from creating
