@@ -26,7 +26,7 @@ export function BrandLogo({
         <span
           className={`font-heading text-[1.35rem] font-semibold tracking-[0.03em] ${inverse ? "text-white" : "text-foreground"}`}
         >
-          PrintNGift
+          Print&Gift
         </span>
       )}
     </Link>

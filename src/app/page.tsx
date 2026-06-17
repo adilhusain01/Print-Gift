@@ -22,7 +22,6 @@ export default async function Home() {
       <section className="relative overflow-hidden">
         <div className="container-site grid min-h-[calc(100svh-108px)] items-center gap-12 py-12 lg:grid-cols-[0.88fr_1.12fr] lg:py-16">
           <div className="relative z-10 max-w-xl">
-            <span className="eyebrow">Thoughtful gifting, made simple</span>
             <h1 className="mt-7 font-heading text-[clamp(3.6rem,7vw,6.8rem)] font-medium leading-[0.9] tracking-[-0.045em]">
               A gift that feels{" "}
               <em className="font-normal text-[#7a3e3e]">considered.</em>
@@ -76,10 +75,6 @@ export default async function Home() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-white/5" />
             </div>
-            <div className="absolute right-0 top-16 h-28 w-px bg-foreground/30" />
-            <p className="absolute right-[-2.5rem] top-48 hidden rotate-90 text-[0.62rem] font-semibold uppercase tracking-[0.28em] text-muted-foreground xl:block">
-              The PrintNGift edit
-            </p>
           </div>
         </div>
       </section>
@@ -118,7 +113,6 @@ export default async function Home() {
       <section className="section-space container-site">
         <div className="mb-12 flex flex-wrap items-end justify-between gap-6">
           <div>
-            <span className="eyebrow">Find the right direction</span>
             <h2 className="mt-4 max-w-xl font-heading text-5xl leading-none tracking-[-0.035em] sm:text-6xl">
               Shop by sentiment
             </h2>
@@ -160,7 +154,6 @@ export default async function Home() {
       <section className="section-space bg-[#eeebe3]">
         <div className="container-site">
           <div className="mb-12 max-w-2xl">
-            <span className="eyebrow">The current edit</span>
             <h2 className="mt-4 font-heading text-5xl leading-none tracking-[-0.035em] sm:text-6xl">
               Gifts people return to
             </h2>
@@ -180,7 +173,6 @@ export default async function Home() {
       <section className="section-space container-site">
         <div className="grid gap-12 lg:grid-cols-[0.75fr_1.25fr] lg:items-start">
           <div className="lg:sticky lg:top-32">
-            <span className="eyebrow">How it works</span>
             <h2 className="mt-5 font-heading text-5xl leading-[0.95] tracking-[-0.035em] sm:text-6xl">
               Personal service, without the complication.
             </h2>

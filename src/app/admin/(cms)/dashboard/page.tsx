@@ -4,8 +4,96 @@ import { formatPrice } from "@/lib/format";
 
 export default async function DashboardPage() {
   const [products, orders] = await Promise.all([getAllProducts(), getOrders()]);
-  const revenue = orders.filter((order) => order.status !== "cancelled").reduce((sum, order) => sum + order.total, 0);
-  const stats = [{ label: "Products", value: products.length, icon: Boxes }, { label: "New orders", value: orders.filter((order) => order.status === "new").length, icon: PackageOpen }, { label: "Order value", value: formatPrice(revenue), icon: IndianRupee }, { label: "Featured", value: products.filter((product) => product.featured).length, icon: Sparkles }];
+  const revenue = orders
+    .filter((order) => order.status !== "cancelled")
+    .reduce((sum, order) => sum + order.total, 0);
+  const stats = [
+    { label: "Products", value: products.length, icon: Boxes },
+    {
+      label: "New orders",
+      value: orders.filter((order) => order.status === "new").length,
+      icon: PackageOpen,
+    },
+    { label: "Order value", value: formatPrice(revenue), icon: IndianRupee },
+    {
+      label: "Featured",
+      value: products.filter((product) => product.featured).length,
+      icon: Sparkles,
+    },
+  ];
   const latestOrders = orders.slice(0, 8);
-  return <><div><span className="eyebrow">Merchant workspace</span><h1 className="mt-4 font-heading text-4xl tracking-[-0.04em] sm:text-5xl">Overview</h1><p className="mt-2 text-muted-foreground">Catalog and order activity at a glance.</p></div><div className="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">{stats.map((stat) => <div key={stat.label} className="surface p-5"><div className="grid size-9 place-items-center rounded-full bg-muted"><stat.icon className="size-4" /></div><p className="mt-7 text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">{stat.label}</p><p className="mt-2 break-words font-heading text-3xl">{stat.value}</p></div>)}</div><section className="surface mt-8 overflow-hidden"><div className="p-5 sm:p-6"><h2 className="font-heading text-3xl">Latest orders</h2></div><div className="grid divide-y divide-border sm:hidden">{latestOrders.map((order) => <article key={order.orderNumber} className="grid grid-cols-2 gap-x-4 gap-y-2 p-5 text-sm"><p className="col-span-2 font-semibold">{order.orderNumber}</p><p className="min-w-0 truncate">{order.customer.name}</p><p className="text-right font-semibold">{formatPrice(order.total)}</p><p className="capitalize text-muted-foreground">{order.status}</p></article>)}</div><div className="hidden overflow-x-auto px-6 pb-6 sm:block"><table className="w-full min-w-[600px] text-left text-sm"><thead><tr className="border-b border-border text-xs uppercase tracking-[0.12em] text-muted-foreground"><th className="pb-3 font-medium">Order</th><th className="font-medium">Customer</th><th className="font-medium">Status</th><th className="font-medium">Total</th></tr></thead><tbody>{latestOrders.map((order) => <tr key={order.orderNumber} className="border-b border-border/70"><td className="py-4 font-semibold">{order.orderNumber}</td><td>{order.customer.name}</td><td className="capitalize text-muted-foreground">{order.status}</td><td className="font-semibold">{formatPrice(order.total)}</td></tr>)}</tbody></table></div></section></>;
+  return (
+    <>
+      <div>
+        <h1 className="mt-4 font-heading text-4xl tracking-[-0.04em] sm:text-5xl">
+          Overview
+        </h1>
+        <p className="mt-2 text-muted-foreground">
+          Catalog and order activity at a glance.
+        </p>
+      </div>
+      <div className="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        {stats.map((stat) => (
+          <div key={stat.label} className="surface p-5">
+            <div className="grid size-9 place-items-center rounded-full bg-muted">
+              <stat.icon className="size-4" />
+            </div>
+            <p className="mt-7 text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+              {stat.label}
+            </p>
+            <p className="mt-2 break-words font-heading text-3xl">
+              {stat.value}
+            </p>
+          </div>
+        ))}
+      </div>
+      <section className="surface mt-8 overflow-hidden">
+        <div className="p-5 sm:p-6">
+          <h2 className="font-heading text-3xl">Latest orders</h2>
+        </div>
+        <div className="grid divide-y divide-border sm:hidden">
+          {latestOrders.map((order) => (
+            <article
+              key={order.orderNumber}
+              className="grid grid-cols-2 gap-x-4 gap-y-2 p-5 text-sm"
+            >
+              <p className="col-span-2 font-semibold">{order.orderNumber}</p>
+              <p className="min-w-0 truncate">{order.customer.name}</p>
+              <p className="text-right font-semibold">
+                {formatPrice(order.total)}
+              </p>
+              <p className="capitalize text-muted-foreground">{order.status}</p>
+            </article>
+          ))}
+        </div>
+        <div className="hidden overflow-x-auto px-6 pb-6 sm:block">
+          <table className="w-full min-w-[600px] text-left text-sm">
+            <thead>
+              <tr className="border-b border-border text-xs uppercase tracking-[0.12em] text-muted-foreground">
+                <th className="pb-3 font-medium">Order</th>
+                <th className="font-medium">Customer</th>
+                <th className="font-medium">Status</th>
+                <th className="font-medium">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              {latestOrders.map((order) => (
+                <tr
+                  key={order.orderNumber}
+                  className="border-b border-border/70"
+                >
+                  <td className="py-4 font-semibold">{order.orderNumber}</td>
+                  <td>{order.customer.name}</td>
+                  <td className="capitalize text-muted-foreground">
+                    {order.status}
+                  </td>
+                  <td className="font-semibold">{formatPrice(order.total)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </>
+  );
 }

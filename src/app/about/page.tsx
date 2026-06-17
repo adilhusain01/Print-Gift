@@ -1,2 +1,28 @@
 import { InfoPage } from "@/components/info-page";
-export default function AboutPage() { return <InfoPage eyebrow="Our story" title="Gifts should feel personal, never hurried." intro="PrintNGift makes it easier to send something thoughtful, even when you do not know exactly where to start." sections={[{ title: "Made with attention", body: "We curate useful, joyful pieces and personalize the details that make a gift feel like it could only be for them." }, { title: "Human confirmation", body: "Every order is confirmed personally over WhatsApp. For custom pieces, we align on the details before making them." }, { title: "Ready to give", body: "Packaging is part of the gift. Every order is prepared to create a proper opening moment." }, { title: "Built for real occasions", body: "Birthdays, promotions, new homes, quiet thank-yous, and the days that need a little lift." }]} />; }
+export default function AboutPage() {
+  return (
+    <InfoPage
+      eyebrow="Our story"
+      title="Gifts should feel personal, never hurried."
+      intro="PrintNGift makes it easier to send something thoughtful, even when you do not know exactly where to start."
+      sections={[
+        {
+          title: "Made with attention",
+          body: "We curate useful, joyful pieces and personalize the details that make a gift feel like it could only be for them.",
+        },
+        {
+          title: "Human confirmation",
+          body: "Every order is confirmed personally over WhatsApp. For custom pieces, we align on the details before making them.",
+        },
+        {
+          title: "Ready to give",
+          body: "Packaging is part of the gift. Every order is prepared to create a proper opening moment.",
+        },
+        {
+          title: "Built for real occasions",
+          body: "Birthdays, promotions, new homes, quiet thank-yous, and the days that need a little lift.",
+        },
+      ]}
+    />
+  );
+}
