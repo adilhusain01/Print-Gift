@@ -11,10 +11,12 @@ import { ProductCard } from "@/components/product-card";
 import { StoreShell } from "@/components/store-shell";
 import { Button } from "@/components/ui/button";
 import { categories } from "@/lib/demo-data";
-import { getProducts } from "@/lib/data";
+import { getProducts, getSettings } from "@/lib/data";
+import { isBulkMode } from "@/lib/store-mode";
 
 export default async function Home() {
-  const products = await getProducts();
+  const [products, settings] = await Promise.all([getProducts(), getSettings()]);
+  const bulkMode = isBulkMode(settings.storeMode);
   const featured = products.filter((product) => product.featured).slice(0, 4);
 
   return (
@@ -92,7 +94,7 @@ export default async function Home() {
             ],
             [
               "Ready for the moment",
-              "Every order is presented to feel complete before it leaves us.",
+              "Every request is prepared with care before it leaves us.",
             ],
           ].map(([title, text]) => (
             <div
@@ -159,7 +161,7 @@ export default async function Home() {
           </div>
           <div className="grid grid-cols-1 gap-x-5 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
             {featured.map((product) => (
-              <ProductCard key={product.slug} product={product} />
+              <ProductCard key={product.slug} product={product} storeMode={settings.storeMode} />
             ))}
           </div>
         </div>
@@ -188,7 +190,7 @@ export default async function Home() {
                 icon: MessageCircle,
                 n: "02",
                 title: "Share the details",
-                text: "Checkout records your order and opens WhatsApp for personalization and final confirmation.",
+                text: bulkMode ? "Your inquiry bag opens WhatsApp with products, quantities, and notes for a tailored quote." : "Checkout records your order and opens WhatsApp for personalization and final confirmation.",
               },
               {
                 icon: PackageCheck,

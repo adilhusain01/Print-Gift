@@ -6,6 +6,7 @@ import { BrandLogo } from "@/components/brand-logo";
 import { CartDrawer } from "@/components/cart-drawer";
 import { Button } from "@/components/ui/button";
 import type { StoreMode } from "@/lib/store-mode";
+import { isBulkMode } from "@/lib/store-mode";
 import {
   Sheet,
   SheetContent,
@@ -27,9 +28,11 @@ export function SiteHeader({
   announcement?: string;
   storeMode?: StoreMode;
 }) {
+  const bulkMode = isBulkMode(storeMode);
+
   return (
     <>
-      <div className="bg-[#26231f] px-4 py-2.5 text-center text-[0.62rem] font-medium uppercase leading-5 tracking-[0.16em] text-white/85 sm:text-[0.67rem] sm:tracking-[0.2em]">{announcement}</div>
+      {bulkMode ? null : <div className="bg-[#26231f] px-4 py-2.5 text-center text-[0.62rem] font-medium uppercase leading-5 tracking-[0.16em] text-white/85 sm:text-[0.67rem] sm:tracking-[0.2em]">{announcement}</div>}
       <header className="sticky top-0 z-40 border-b border-border/80 bg-background/92 backdrop-blur-xl">
         <div className="container-site flex h-[76px] items-center justify-between gap-4">
           <BrandLogo />

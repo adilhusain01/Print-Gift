@@ -12,11 +12,11 @@ export default function AboutPage() {
         },
         {
           title: "Human confirmation",
-          body: "Every order is confirmed personally over WhatsApp. For custom pieces, we align on the details before making them.",
+          body: "Every order or bulk inquiry is confirmed personally over WhatsApp. For custom pieces, we align on the details before making them.",
         },
         {
           title: "Ready to give",
-          body: "Packaging is part of the gift. Every order is prepared to create a proper opening moment.",
+          body: "Packaging is part of the gift. Every request is prepared to create a proper opening moment.",
         },
         {
           title: "Built for real occasions",

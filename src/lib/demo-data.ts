@@ -96,12 +96,14 @@ export const demoProducts: Product[] = [
   },
 ];
 
+const demoStoreMode = defaultStoreMode();
+
 export const demoSettings: StoreSettings = {
   whatsappNumber: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "919999999999",
   shippingFee: 99,
   freeShippingThreshold: 1999,
-  announcement: "Free shipping on orders above ₹1,999",
-  storeMode: defaultStoreMode(),
+  announcement: demoStoreMode === "bulk" ? "Bulk gifting quotes are confirmed on WhatsApp" : "Free shipping on orders above ₹1,999",
+  storeMode: demoStoreMode,
 };
 
 export const demoOrders: Order[] = [
