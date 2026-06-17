@@ -11,9 +11,7 @@ const display = Cormorant_Garamond({
 const body = Manrope({ variable: "--font-body", subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL || "https://www.printngift.store",
-  ),
+  metadataBase: new URL("https://www.printngift.store"),
   title: {
     default: "Print&Gift | Gifts worth remembering",
     template: "%s | Print&Gift",
@@ -30,8 +28,14 @@ export const metadata: Metadata = {
     description: "Gifts worth remembering.",
     url: "https://www.printngift.store",
     siteName: "Print&Gift",
-    images: [{ url: "/logo.png", width: 320, height: 309, alt: "Print&Gift" }],
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: "Print&Gift" }],
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Print&Gift",
+    description: "Gifts worth remembering.",
+    images: ["/og.png"],
   },
 };
 

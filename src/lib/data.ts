@@ -43,7 +43,7 @@ export const getSettings = cache(async (): Promise<StoreSettings> => {
   try {
     const db = await getDb();
     const settings = await db.collection<StoreSettings>("settings").findOne({ key: "store" } as never);
-    return settings ? serialize(settings) : demoSettings;
+    return settings ? serialize({ ...demoSettings, ...settings }) : demoSettings;
   } catch (error) {
     console.error("Falling back to demo settings", error);
     return demoSettings;

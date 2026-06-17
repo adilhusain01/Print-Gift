@@ -1,4 +1,5 @@
 import type { Order, Product, StoreSettings } from "@/lib/types";
+import { defaultStoreMode } from "@/lib/store-mode";
 
 export const categories = [
   { name: "Personalized", slug: "personalized", color: "#ff6b6b" },
@@ -100,6 +101,7 @@ export const demoSettings: StoreSettings = {
   shippingFee: 99,
   freeShippingThreshold: 1999,
   announcement: "Free shipping on orders above ₹1,999",
+  storeMode: defaultStoreMode(),
 };
 
 export const demoOrders: Order[] = [

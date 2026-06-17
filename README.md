@@ -1,4 +1,4 @@
-# PrintNGift
+# Print&Gift
 
 Modern gift commerce storefront and merchant CMS for
 [printngift.store](https://printngift.store).
@@ -33,7 +33,7 @@ npm run dev
 ```bash
 curl -X POST http://localhost:3000/api/auth/sign-up/email \
   -H "Content-Type: application/json" \
-  -d '{"name":"PrintNGift Owner","email":"owner@printngift.store","password":"YOUR_STRONG_PASSWORD"}'
+  -d '{"name":"Print&Gift Owner","email":"owner@printngift.store","password":"YOUR_STRONG_PASSWORD"}'
 ```
 
 Then sign in at `http://localhost:3000/admin`.
@@ -54,11 +54,14 @@ BETTER_AUTH_SECRET=YOUR_RANDOM_SECRET
 BETTER_AUTH_URL=https://www.printngift.store
 NEXT_PUBLIC_SITE_URL=https://www.printngift.store
 NEXT_PUBLIC_WHATSAPP_NUMBER=91XXXXXXXXXX
+NEXT_PUBLIC_STORE_MODE=retail
 ADMIN_EMAIL=owner@printngift.store
 ```
 
 Generate `BETTER_AUTH_SECRET` with `openssl rand -base64 32`. The WhatsApp number must
 include the country code and contain digits only, without `+`, spaces, or dashes.
+`NEXT_PUBLIC_STORE_MODE` can be `retail` or `bulk`; it is the fallback for fresh installs,
+and the CMS Store mode setting can override it after settings are saved in MongoDB.
 `ADMIN_EMAIL` is the only email address allowed to register. The admin password is chosen
 when creating the account and is not stored as an environment variable.
 
@@ -70,7 +73,7 @@ when creating the account and is not stored as an environment variable.
 ```bash
 curl -X POST https://www.printngift.store/api/auth/sign-up/email \
   -H "Content-Type: application/json" \
-  -d '{"name":"PrintNGift Owner","email":"owner@printngift.store","password":"YOUR_STRONG_PASSWORD"}'
+  -d '{"name":"Print&Gift Owner","email":"owner@printngift.store","password":"YOUR_STRONG_PASSWORD"}'
 ```
 
 Keep `ADMIN_EMAIL` set in production; it prevents other email addresses from creating

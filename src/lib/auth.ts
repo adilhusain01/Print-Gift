@@ -7,7 +7,7 @@ const client = new MongoClient(uri);
 const db = client.db(process.env.MONGODB_DB || "printngift");
 
 export const auth = betterAuth({
-  appName: "PrintNGift CMS",
+  appName: "Print&Gift CMS",
   database: mongodbAdapter(db),
   emailAndPassword: { enabled: true },
   databaseHooks: {

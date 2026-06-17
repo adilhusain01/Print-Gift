@@ -1,8 +1,8 @@
-# PrintNGift implementation plan
+# Print&Gift implementation plan
 
 ## Product goal
 
-PrintNGift is a mobile-first gift commerce storefront for `printngift.store`. Customers
+Print&Gift is a mobile-first gift commerce storefront for `printngift.store`. Customers
 browse curated and personalized gifts, build a cart, submit delivery details, and finish
 the conversation in WhatsApp. The merchant manages the catalog and incoming orders from
 a protected CMS.

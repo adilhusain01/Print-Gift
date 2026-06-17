@@ -9,7 +9,7 @@ export function SiteFooter() {
         <div><h3 className="mb-3 text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-white/40">Explore</h3><div className="grid text-sm text-white/75"><Link href="/shop" className="flex min-h-11 items-center">Shop all</Link><Link href="/about" className="flex min-h-11 items-center">Our story</Link><Link href="/faq" className="flex min-h-11 items-center">Frequently asked</Link></div></div>
         <div><h3 className="mb-3 text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-white/40">Information</h3><div className="grid text-sm text-white/75"><Link href="/policies" className="flex min-h-11 items-center">Shipping & returns</Link><Link href="/contact" className="flex min-h-11 items-center">Contact</Link><Link href="/admin" className="flex min-h-11 items-center">Merchant login</Link></div></div>
       </div>
-      <div className="container-site mt-14 border-t border-white/10 pt-6 text-xs text-white/35">© {new Date().getFullYear()} PrintNGift · printngift.store</div>
+      <div className="container-site mt-14 border-t border-white/10 pt-6 text-xs text-white/35">© {new Date().getFullYear()} Print&Gift · printngift.store</div>
     </footer>
   );
 }

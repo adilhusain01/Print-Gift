@@ -15,6 +15,6 @@ const products = [
 const now = new Date().toISOString();
 await db.collection("products").deleteMany({});
 await db.collection("products").insertMany(products.map((product) => ({ ...product, createdAt: now, updatedAt: now })));
-await db.collection("settings").updateOne({ key: "store" }, { $set: { whatsappNumber: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "919999999999", shippingFee: 99, freeShippingThreshold: 1999, announcement: "Free shipping on orders above ₹1,999" } }, { upsert: true });
+await db.collection("settings").updateOne({ key: "store" }, { $set: { whatsappNumber: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "919999999999", shippingFee: 99, freeShippingThreshold: 1999, announcement: "Free shipping on orders above ₹1,999", storeMode: process.env.NEXT_PUBLIC_STORE_MODE === "bulk" || process.env.STORE_MODE === "bulk" ? "bulk" : "retail" } }, { upsert: true });
 await client.close();
 console.log(`Seeded ${products.length} products and store settings.`);

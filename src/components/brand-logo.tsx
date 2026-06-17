@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 
 export function BrandLogo({
-  inverse = false,
   compact = false,
 }: {
   inverse?: boolean;
@@ -11,24 +10,17 @@ export function BrandLogo({
   return (
     <Link
       href="/"
-      className="group inline-flex items-center gap-3"
-      aria-label="PrintNGift home"
+      className="group inline-flex items-center"
+      aria-label="Print&Gift home"
     >
       <Image
         src="/logo.png"
-        alt=""
-        width={42}
-        height={41}
+        alt="Print&Gift"
+        width={2514}
+        height={479}
         priority
-        className="size-10 object-contain transition-transform duration-300 group-hover:scale-105"
+        className={`${compact ? "h-8 w-auto" : "h-9 w-auto sm:h-10"} max-w-[170px] object-contain transition-transform duration-300 group-hover:scale-[1.02]`}
       />
-      {compact ? null : (
-        <span
-          className={`font-heading text-[1.35rem] font-semibold tracking-[0.03em] ${inverse ? "text-white" : "text-foreground"}`}
-        >
-          Print&Gift
-        </span>
-      )}
     </Link>
   );
 }

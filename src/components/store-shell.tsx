@@ -4,5 +4,5 @@ import { SiteHeader } from "@/components/site-header";
 
 export async function StoreShell({ children }: { children: React.ReactNode }) {
   const settings = await getSettings();
-  return <><SiteHeader announcement={settings.announcement} /><main>{children}</main><SiteFooter /></>;
+  return <><SiteHeader announcement={settings.announcement} storeMode={settings.storeMode} /><main>{children}</main><SiteFooter /></>;
 }

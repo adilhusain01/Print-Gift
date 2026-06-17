@@ -4,7 +4,7 @@ export default function AboutPage() {
     <InfoPage
       eyebrow="Our story"
       title="Gifts should feel personal, never hurried."
-      intro="PrintNGift makes it easier to send something thoughtful, even when you do not know exactly where to start."
+      intro="Print&Gift makes it easier to send something thoughtful, even when you do not know exactly where to start."
       sections={[
         {
           title: "Made with attention",

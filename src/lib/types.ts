@@ -54,4 +54,5 @@ export type StoreSettings = {
   shippingFee: number;
   freeShippingThreshold: number;
   announcement: string;
+  storeMode: "retail" | "bulk";
 };

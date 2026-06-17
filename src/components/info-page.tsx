@@ -14,7 +14,7 @@ export function InfoPage({
   return (
     <StoreShell>
       <section className="container-site section-space">
-        {/* <span className="eyebrow">{eyebrow}</span> */}
+        <span className="eyebrow">{eyebrow}</span>
         <h1 className="mt-6 max-w-5xl font-heading text-[clamp(3.5rem,7vw,6.5rem)] leading-[.92] tracking-[-0.04em]">
           {title}
         </h1>

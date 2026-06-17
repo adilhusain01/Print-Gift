@@ -4,7 +4,7 @@ import { z } from "zod";
 import { auth } from "@/lib/auth";
 import { getDb } from "@/lib/mongodb";
 
-const schema = z.object({ whatsappNumber: z.string().regex(/^\d{10,15}$/), shippingFee: z.coerce.number().min(0), freeShippingThreshold: z.coerce.number().min(0), announcement: z.string().min(3).max(160) });
+const schema = z.object({ whatsappNumber: z.string().regex(/^\d{10,15}$/), shippingFee: z.coerce.number().min(0), freeShippingThreshold: z.coerce.number().min(0), announcement: z.string().min(3).max(160), storeMode: z.enum(["retail", "bulk"]) });
 
 export async function PUT(request: Request) {
   const session = await auth.api.getSession({ headers: request.headers });
