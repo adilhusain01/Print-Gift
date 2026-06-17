@@ -136,14 +136,9 @@ export default async function Home() {
                 0{index + 1}
               </span>
               <div className="mt-24 flex items-end justify-between gap-4">
-                <div>
-                  <p className="mb-2 text-xs text-muted-foreground">
-                    A considered edit
-                  </p>
-                  <h3 className="font-heading text-3xl leading-none">
-                    {category.name}
-                  </h3>
-                </div>
+                <h3 className="font-heading text-3xl leading-none">
+                  {category.name}
+                </h3>
                 <ArrowRight className="size-5 transition-transform group-hover:translate-x-1" />
               </div>
             </Link>
