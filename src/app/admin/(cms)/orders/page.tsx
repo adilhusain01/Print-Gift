@@ -36,7 +36,7 @@ export default async function OrdersPage() {
             </div>
             <div className="mt-5 grid min-w-0 gap-6 border-t border-border pt-5 md:grid-cols-3">
               <div className="min-w-0">
-                <p className="text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                <p className="text-sm font-medium text-muted-foreground">
                   Customer
                 </p>
                 <p className="mt-3 break-words font-semibold">
@@ -49,7 +49,7 @@ export default async function OrdersPage() {
                 </p>
               </div>
               <div className="min-w-0">
-                <p className="text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                <p className="text-sm font-medium text-muted-foreground">
                   Items
                 </p>
                 <div className="mt-3 grid gap-2 text-sm">
@@ -61,7 +61,7 @@ export default async function OrdersPage() {
                 </div>
               </div>
               <div className="min-w-0">
-                <p className="text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                <p className="text-sm font-medium text-muted-foreground">
                   Total
                 </p>
                 <p className="mt-3 break-words font-heading text-3xl">

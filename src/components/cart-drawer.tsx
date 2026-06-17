@@ -20,7 +20,7 @@ export function CartDrawer({ storeMode = "retail" }: { storeMode?: StoreMode }) 
     <Sheet>
       <SheetTrigger render={<Button variant="ghost" className="relative size-11 rounded-full" />}>
           <ShoppingBag className="size-5" />
-          {count > 0 ? <span className="absolute right-0 top-0 grid size-5 place-items-center rounded-full bg-primary text-[0.6rem] font-semibold text-primary-foreground">{count}</span> : null}
+          {count > 0 ? <span className="absolute right-0 top-0 grid size-5 place-items-center rounded-full bg-accent text-[0.6rem] font-semibold text-accent-foreground">{count}</span> : null}
           <span className="sr-only">Open cart</span>
       </SheetTrigger>
       <SheetContent className="data-[side=right]:w-full border-l border-border bg-background sm:max-w-md">
@@ -33,7 +33,7 @@ export function CartDrawer({ storeMode = "retail" }: { storeMode?: StoreMode }) 
             <div className="my-8 rounded-xl border border-border bg-card p-8 text-center">
               <ShoppingBag className="mx-auto mb-3 size-8" />
               <p className="font-medium">{bulkMode ? "Your inquiry bag is empty." : "Your gift bag is empty."}</p>
-              <Button nativeButton={false} render={<Link href="/shop" />} className="brutal-button mt-5 rounded-full bg-primary px-6 text-primary-foreground">Explore gifts</Button>
+              <Button nativeButton={false} render={<Link href="/shop" />} className="brutal-button mt-5 rounded-full bg-accent px-6 text-accent-foreground hover:bg-[#4d5540]">Explore gifts</Button>
             </div>
           ) : items.map((item) => (
             <div key={item.slug} className="grid grid-cols-[72px_minmax(0,1fr)] gap-3 border-b border-border py-4 sm:grid-cols-[84px_minmax(0,1fr)] sm:gap-4">
@@ -56,7 +56,7 @@ export function CartDrawer({ storeMode = "retail" }: { storeMode?: StoreMode }) 
         {items.length > 0 ? (
           <div className="border-t border-border p-4">
             {bulkMode ? <p className="mb-4 text-sm leading-6 text-muted-foreground">We will quote pricing after reviewing quantities, customization, and timeline.</p> : <div className="mb-4 flex justify-between text-sm font-semibold"><span>Subtotal</span><span>{formatPrice(subtotal)}</span></div>}
-            <Button nativeButton={false} render={<Link href="/checkout" />} className="brutal-button h-12 w-full rounded-full bg-primary text-primary-foreground">{bulkMode ? "Continue to inquiry" : "Continue to checkout"}</Button>
+            <Button nativeButton={false} render={<Link href="/checkout" />} className="brutal-button h-12 w-full rounded-full bg-accent text-accent-foreground hover:bg-[#4d5540]">{bulkMode ? "Continue to inquiry" : "Continue to checkout"}</Button>
           </div>
         ) : null}
       </SheetContent>

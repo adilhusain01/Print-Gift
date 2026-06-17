@@ -37,7 +37,7 @@ export default async function Home() {
                 nativeButton={false}
                 render={<Link href="/shop" />}
                 size="lg"
-                className="brutal-button h-12 bg-primary px-7 text-primary-foreground"
+                className="brutal-button h-12 bg-accent px-7 text-accent-foreground hover:bg-[#4d5540]"
               >
                 Explore the collection <ArrowRight />
               </Button>
@@ -101,7 +101,7 @@ export default async function Home() {
               key={title}
               className="py-5 sm:px-8 sm:first:pl-0 sm:last:pr-0"
             >
-              <h2 className="font-sans text-xs font-semibold uppercase tracking-[0.18em]">
+              <h2 className="font-heading text-2xl">
                 {title}
               </h2>
               <p className="mt-2 text-sm leading-6 text-muted-foreground">
@@ -128,15 +128,12 @@ export default async function Home() {
           </Link>
         </div>
         <div className="grid gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
-          {categories.map((category, index) => (
+          {categories.map((category) => (
             <Link
               href={`/shop?category=${category.slug}`}
               key={category.slug}
               className="group min-h-64 bg-card p-7 transition-colors hover:bg-[#eeebe3]"
             >
-              <span className="text-[0.65rem] font-semibold tracking-[0.2em] text-muted-foreground">
-                0{index + 1}
-              </span>
               <div className="mt-24 flex items-end justify-between gap-4">
                 <h3 className="font-heading text-3xl leading-none">
                   {category.name}
@@ -204,7 +201,7 @@ export default async function Home() {
                 className="grid gap-5 py-8 sm:grid-cols-[70px_1fr] sm:py-10"
               >
                 <div className="flex items-center gap-3 sm:block">
-                  <span className="text-xs tracking-[0.2em] text-muted-foreground">
+                  <span className="text-sm text-muted-foreground">
                     {step.n}
                   </span>
                   <step.icon className="ml-auto size-5 text-accent sm:ml-0 sm:mt-5" />
@@ -223,10 +220,7 @@ export default async function Home() {
 
       <section className="bg-[#59614a] py-20 text-white sm:py-28">
         <div className="container-site max-w-4xl text-center">
-          <span className="text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-white/55">
-            The thought is the gift
-          </span>
-          <p className="mt-6 font-heading text-[clamp(3rem,7vw,6rem)] leading-[0.95] tracking-[-0.04em]">
+          <p className="font-heading text-[clamp(3rem,7vw,6rem)] leading-[0.95] tracking-[-0.04em]">
             Something they will know was chosen for them.
           </p>
           <Button

@@ -32,7 +32,7 @@ export function SiteHeader({
 
   return (
     <>
-      {bulkMode ? null : <div className="bg-[#26231f] px-4 py-2.5 text-center text-[0.62rem] font-medium uppercase leading-5 tracking-[0.16em] text-white/85 sm:text-[0.67rem] sm:tracking-[0.2em]">{announcement}</div>}
+      {bulkMode ? null : <div className="bg-[#26231f] px-4 py-2.5 text-center text-sm leading-5 text-white/85">{announcement}</div>}
       <header className="sticky top-0 z-40 border-b border-border/80 bg-background/92 backdrop-blur-xl">
         <div className="container-site flex h-[76px] items-center justify-between gap-4">
           <BrandLogo />
@@ -41,7 +41,7 @@ export function SiteHeader({
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-foreground/70 transition-colors hover:text-foreground"
+                className="text-sm font-medium text-foreground/70 transition-colors hover:text-foreground"
               >
                 {link.label}
               </Link>
@@ -51,7 +51,7 @@ export function SiteHeader({
             <Button
               nativeButton={false}
               render={<Link href="/shop" />}
-              className="brutal-button hidden h-10 bg-primary px-5 text-primary-foreground sm:inline-flex"
+              className="brutal-button hidden h-10 bg-accent px-5 text-accent-foreground hover:bg-[#4d5540] sm:inline-flex"
             >
               Explore gifts
             </Button>

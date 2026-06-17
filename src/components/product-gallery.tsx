@@ -28,8 +28,8 @@ export function ProductGallery({ images, name }: { images: string[]; name: strin
         />
         {gallery.length > 1 ? (
           <>
-            <Button type="button" size="icon" variant="secondary" className="absolute left-3 top-1/2 size-11 -translate-y-1/2 rounded-full bg-white/90 opacity-100 shadow-sm backdrop-blur sm:left-4 sm:opacity-0 sm:transition-opacity sm:group-hover:opacity-100" onClick={() => changeImage(-1)} aria-label="Previous product image"><ChevronLeft /></Button>
-            <Button type="button" size="icon" variant="secondary" className="absolute right-3 top-1/2 size-11 -translate-y-1/2 rounded-full bg-white/90 opacity-100 shadow-sm backdrop-blur sm:right-4 sm:opacity-0 sm:transition-opacity sm:group-hover:opacity-100" onClick={() => changeImage(1)} aria-label="Next product image"><ChevronRight /></Button>
+            <Button type="button" size="icon" variant="secondary" className="absolute left-3 top-1/2 size-11 -translate-y-1/2 rounded-full border border-border/70 bg-white/95 text-foreground opacity-100 shadow-sm backdrop-blur hover:bg-white hover:text-foreground sm:left-4 sm:opacity-0 sm:transition-opacity sm:group-hover:opacity-100" onClick={() => changeImage(-1)} aria-label="Previous product image"><ChevronLeft /></Button>
+            <Button type="button" size="icon" variant="secondary" className="absolute right-3 top-1/2 size-11 -translate-y-1/2 rounded-full border border-border/70 bg-white/95 text-foreground opacity-100 shadow-sm backdrop-blur hover:bg-white hover:text-foreground sm:right-4 sm:opacity-0 sm:transition-opacity sm:group-hover:opacity-100" onClick={() => changeImage(1)} aria-label="Next product image"><ChevronRight /></Button>
             <span className="absolute bottom-4 right-4 rounded-full bg-black/60 px-3 py-1.5 text-xs text-white backdrop-blur">{activeIndex + 1} / {gallery.length}</span>
           </>
         ) : null}

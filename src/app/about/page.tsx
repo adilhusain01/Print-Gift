@@ -2,7 +2,6 @@ import { InfoPage } from "@/components/info-page";
 export default function AboutPage() {
   return (
     <InfoPage
-      eyebrow="Our story"
       title="Gifts should feel personal, never hurried."
       intro="Print&Gift makes it easier to send something thoughtful, even when you do not know exactly where to start."
       sections={[

@@ -26,7 +26,7 @@ export function AdminNav() {
           <LogOut />
         </Button>
       </div>
-      <p className="mt-8 hidden text-[0.62rem] font-semibold uppercase tracking-[0.22em] text-white/35 lg:block">Store management</p>
+      <p className="mt-8 hidden text-sm text-white/45 lg:block">Store management</p>
       <nav className="mt-4 grid grid-cols-2 gap-2 lg:grid-cols-1">
         {links.map((link) => (
           <Link key={link.href} href={link.href} className={`flex min-h-11 min-w-0 items-center gap-2 rounded-lg px-3 text-sm transition-colors lg:gap-3 ${pathname === link.href ? "bg-white text-foreground" : "text-white/60 hover:bg-white/8 hover:text-white"}`}>

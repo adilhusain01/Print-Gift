@@ -38,7 +38,7 @@ export default async function DashboardPage() {
             <div className="grid size-9 place-items-center rounded-full bg-muted">
               <stat.icon className="size-4" />
             </div>
-            <p className="mt-7 text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+            <p className="mt-7 text-sm text-muted-foreground">
               {stat.label}
             </p>
             <p className="mt-2 break-words font-heading text-3xl">
@@ -69,7 +69,7 @@ export default async function DashboardPage() {
         <div className="hidden overflow-x-auto px-6 pb-6 sm:block">
           <table className="w-full min-w-[600px] text-left text-sm">
             <thead>
-              <tr className="border-b border-border text-xs uppercase tracking-[0.12em] text-muted-foreground">
+              <tr className="border-b border-border text-sm text-muted-foreground">
                 <th className="pb-3 font-medium">Order</th>
                 <th className="font-medium">Customer</th>
                 <th className="font-medium">Status</th>

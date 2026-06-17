@@ -26,11 +26,11 @@ export function ProductCard({ product, storeMode = "retail" }: { product: Produc
           className="object-cover transition duration-700 ease-out group-hover:scale-[1.035]"
         />
         {product.customizable ? (
-          <span className="absolute left-3 top-3 rounded-full bg-white/90 px-3 py-1.5 text-[0.62rem] font-semibold uppercase tracking-[0.14em] backdrop-blur">Personalizable</span>
+          <span className="absolute left-3 top-3 rounded-full bg-white/90 px-3 py-1.5 text-xs font-medium backdrop-blur">Personalizable</span>
         ) : null}
         <Button
           size="icon"
-          className="absolute bottom-3 right-3 size-11 rounded-full bg-white text-foreground opacity-100 shadow-sm transition-[color,background-color,transform,opacity] hover:bg-primary hover:text-primary-foreground motion-reduce:transition-none sm:translate-y-2 sm:opacity-0 sm:group-hover:translate-y-0 sm:group-hover:opacity-100"
+          className="absolute bottom-3 right-3 size-11 rounded-full bg-white text-foreground opacity-100 shadow-sm transition-[color,background-color,transform,opacity] hover:bg-accent hover:text-accent-foreground motion-reduce:transition-none sm:translate-y-2 sm:opacity-0 sm:group-hover:translate-y-0 sm:group-hover:opacity-100"
           onClick={(event) => {
             event.preventDefault();
             add(product);
@@ -42,7 +42,7 @@ export function ProductCard({ product, storeMode = "retail" }: { product: Produc
         </Button>
       </Link>
       <div className="pt-4">
-        <p className="text-[0.64rem] font-semibold uppercase tracking-[0.17em] text-muted-foreground">{product.category.replace("-", " ")}</p>
+        <p className="text-sm text-muted-foreground">{product.category.replace("-", " ")}</p>
         <div className="mt-2 flex items-start justify-between gap-4">
           <Link href={`/shop/${product.slug}`} className="font-heading text-2xl leading-tight transition-colors hover:text-accent">{product.name}</Link>
           {bulkMode ? <div className="shrink-0 pt-1 text-sm font-semibold text-muted-foreground">Quote</div> : <div className="shrink-0 pt-1 text-sm font-semibold">{formatPrice(product.price)}</div>}
