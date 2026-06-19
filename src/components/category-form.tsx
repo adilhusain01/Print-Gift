@@ -13,20 +13,21 @@ import type { Category } from "@/lib/types";
 export function CategoryForm({ category }: { category?: Category }) {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  const persisted = Boolean(category?._id);
 
   async function submit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setLoading(true);
     const data = Object.fromEntries(new FormData(event.currentTarget).entries());
     const response = await fetch("/api/admin/categories", {
-      method: category ? "PUT" : "POST",
+      method: persisted ? "PUT" : "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ ...data, _id: category?._id, active: data.active ? "on" : "off" }),
     });
     const result = await response.json();
     setLoading(false);
     if (!response.ok) return toast.error(result.error || "Could not save category");
-    toast.success(category ? "Category updated" : "Category created");
+    toast.success(persisted ? "Category updated" : "Category created");
     setOpen(false);
     window.location.reload();
   }
@@ -69,7 +70,7 @@ export function CategoryForm({ category }: { category?: Category }) {
             <label className="flex min-h-11 items-center gap-2 text-sm font-medium"><input type="checkbox" name="active" defaultChecked={category?.active ?? true} /> Active</label>
           </div>
           <Button type="submit" disabled={loading} className="min-h-11 rounded-full">{loading ? <><Loader2 className="animate-spin" /> Saving...</> : category ? "Save changes" : "Create category"}</Button>
-          {category ? <Button type="button" disabled={loading} variant="ghost" onClick={remove} className="min-h-11 text-destructive"><Trash2 /> Delete category</Button> : null}
+          {persisted ? <Button type="button" disabled={loading} variant="ghost" onClick={remove} className="min-h-11 text-destructive"><Trash2 /> Delete category</Button> : null}
         </form>
       </DialogContent>
     </Dialog>
