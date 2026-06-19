@@ -1,11 +1,12 @@
 import Image from "next/image";
 import { ProductForm } from "@/components/product-form";
 import { Badge } from "@/components/ui/badge";
-import { getAllProducts } from "@/lib/data";
+import { productPrimaryImage } from "@/lib/catalog";
+import { getAllCategories, getAllProducts } from "@/lib/data";
 import { formatPrice } from "@/lib/format";
 
 export default async function ProductsPage() {
-  const products = await getAllProducts();
+  const [products, categories] = await Promise.all([getAllProducts(), getAllCategories()]);
   return (
     <>
       <div className="grid items-end gap-5 sm:flex sm:justify-between">
@@ -18,7 +19,7 @@ export default async function ProductsPage() {
           </p>
         </div>
         <div className="justify-self-start">
-          <ProductForm />
+          <ProductForm categories={categories} />
         </div>
       </div>
       <div className="surface mt-8 divide-y divide-border overflow-hidden">
@@ -28,7 +29,7 @@ export default async function ProductsPage() {
             className="grid min-w-0 grid-cols-[72px_minmax(0,1fr)] gap-4 p-4 sm:grid-cols-[82px_minmax(0,1fr)_auto] sm:items-center sm:p-5"
           >
             <Image
-              src={product.images[0]}
+              src={productPrimaryImage(product)}
               alt=""
               width={82}
               height={92}
@@ -46,14 +47,14 @@ export default async function ProductsPage() {
                 ) : null}
               </div>
               <p className="mt-1 text-xs capitalize leading-5 text-muted-foreground">
-                {product.category.replace("-", " ")} · {product.stock} in stock
+                {categories.find((category) => category.slug === product.category)?.name || product.category.replace("-", " ")} · {product.stock} in stock{product.variants?.length ? ` · ${product.variants.length} colors` : ""}
               </p>
               <p className="mt-2 text-sm font-semibold">
                 {formatPrice(product.price)}
               </p>
             </div>
             <div className="col-start-2 sm:col-auto">
-              <ProductForm product={product} />
+              <ProductForm product={product} categories={categories} />
             </div>
           </article>
         ))}

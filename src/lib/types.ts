@@ -1,3 +1,24 @@
+export type Category = {
+  _id?: string;
+  name: string;
+  slug: string;
+  description?: string;
+  color?: string;
+  featured: boolean;
+  active: boolean;
+  createdAt?: string;
+  updatedAt?: string;
+};
+
+export type ProductVariant = {
+  id: string;
+  name: string;
+  colorHex: string;
+  images: string[];
+  imagePublicIds?: Record<string, string>;
+  stock?: number;
+};
+
 export type Product = {
   _id?: string;
   slug: string;
@@ -8,6 +29,8 @@ export type Product = {
   compareAtPrice?: number;
   category: string;
   images: string[];
+  imagePublicIds?: Record<string, string>;
+  variants?: ProductVariant[];
   tags: string[];
   featured: boolean;
   active: boolean;
@@ -21,6 +44,10 @@ export type CartItem = Pick<
   Product,
   "slug" | "name" | "price" | "images" | "customizable"
 > & {
+  key: string;
+  variantId?: string;
+  variantName?: string;
+  variantColorHex?: string;
   quantity: number;
 };
 

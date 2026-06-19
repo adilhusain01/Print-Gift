@@ -12,12 +12,23 @@ const schema = z.object({
   price: z.coerce.number().positive(),
   category: z.string().min(2),
   stock: z.coerce.number().int().min(0),
-  images: z.array(z.string().url()).min(1),
+  images: z.array(z.string().url()).default([]),
+  imagePublicIds: z.record(z.string(), z.string()).optional().default({}),
+  variants: z.array(z.object({
+    id: z.string().min(2),
+    name: z.string().min(1),
+    colorHex: z.string().regex(/^#[0-9A-Fa-f]{6}$/),
+    images: z.array(z.string().url()).default([]),
+    imagePublicIds: z.record(z.string(), z.string()).optional().default({}),
+    stock: z.number().int().min(0).optional(),
+  })).optional().default([]),
   tags: z.string().optional().default(""),
   shortDescription: z.string().min(5),
   description: z.string().min(10),
   featured: z.string().optional(),
   customizable: z.string().optional(),
+}).refine((data) => data.images.length > 0 || data.variants.some((variant) => variant.images.length > 0), {
+  message: "Upload at least one product image.",
 });
 
 export async function POST(request: Request) {
@@ -33,6 +44,8 @@ export async function POST(request: Request) {
     category: slugify(data.category, { lower: true, strict: true }),
     stock: data.stock,
     images: data.images,
+    imagePublicIds: data.imagePublicIds,
+    variants: data.variants,
     tags: data.tags.split(",").map((tag) => tag.trim()).filter(Boolean),
     shortDescription: data.shortDescription,
     description: data.description,
@@ -52,7 +65,7 @@ export async function PUT(request: Request) {
   const parsed = schema.safeParse(await request.json());
   if (!parsed.success || !parsed.data._id) return NextResponse.json({ error: "Please check all product fields." }, { status: 400 });
   const data = parsed.data;
-  await saveProduct({ _id: data._id, slug: slugify(data.name, { lower: true, strict: true }), name: data.name, price: data.price, category: slugify(data.category, { lower: true, strict: true }), stock: data.stock, images: data.images, tags: data.tags.split(",").map((tag) => tag.trim()).filter(Boolean), shortDescription: data.shortDescription, description: data.description, featured: data.featured === "on", customizable: data.customizable === "on", active: true });
+  await saveProduct({ _id: data._id, slug: slugify(data.name, { lower: true, strict: true }), name: data.name, price: data.price, category: slugify(data.category, { lower: true, strict: true }), stock: data.stock, images: data.images, imagePublicIds: data.imagePublicIds, variants: data.variants, tags: data.tags.split(",").map((tag) => tag.trim()).filter(Boolean), shortDescription: data.shortDescription, description: data.description, featured: data.featured === "on", customizable: data.customizable === "on", active: true });
   revalidatePath("/", "layout");
   return NextResponse.json({ ok: true });
 }
@@ -64,6 +77,15 @@ export async function DELETE(request: Request) {
   if (!id || !ObjectId.isValid(id)) return NextResponse.json({ error: "Invalid product" }, { status: 400 });
   const { getDb } = await import("@/lib/mongodb");
   const db = await getDb();
+  const product = await db.collection("products").findOne({ _id: new ObjectId(id) });
+  const publicIds = [
+    ...Object.values((product?.imagePublicIds || {}) as Record<string, string>),
+    ...((product?.variants || []) as Array<{ imagePublicIds?: Record<string, string> }>).flatMap((variant) => Object.values(variant.imagePublicIds || {})),
+  ];
+  if (publicIds.length) {
+    const { deleteImageFromCloudinary } = await import("@/lib/cloudinary");
+    await Promise.allSettled(publicIds.map((publicId) => deleteImageFromCloudinary(publicId)));
+  }
   await db.collection("products").deleteOne({ _id: new ObjectId(id) });
   revalidatePath("/", "layout");
   return NextResponse.json({ ok: true });

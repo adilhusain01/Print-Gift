@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { ShopCatalog } from "@/components/shop-catalog";
 import { StoreShell } from "@/components/store-shell";
-import { getProducts, getSettings } from "@/lib/data";
+import { getCategories, getProducts, getSettings } from "@/lib/data";
 
 export const metadata: Metadata = {
   title: "Shop gifts",
@@ -13,7 +13,7 @@ export default async function ShopPage({
 }: {
   searchParams: Promise<{ category?: string }>;
 }) {
-  const [products, settings, params] = await Promise.all([getProducts(), getSettings(), searchParams]);
+  const [products, settings, categories, params] = await Promise.all([getProducts(), getSettings(), getCategories(), searchParams]);
   return (
     <StoreShell>
       <section className="container-site section-space">
@@ -24,7 +24,7 @@ export default async function ShopPage({
           A considered edit of ready-to-gift and personalized pieces. Custom
           details are confirmed with you before we begin.
         </p>
-        <ShopCatalog products={products} initialCategory={params.category} storeMode={settings.storeMode} />
+        <ShopCatalog products={products} categories={categories} initialCategory={params.category} storeMode={settings.storeMode} />
       </section>
     </StoreShell>
   );

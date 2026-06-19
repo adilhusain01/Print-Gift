@@ -1,12 +1,13 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
+import { findProductVariant, productPrimaryImage, productVariantKey } from "@/lib/catalog";
 import { getProducts, getSettings } from "@/lib/data";
 import { getDb, hasDatabase } from "@/lib/mongodb";
 import { isBulkMode } from "@/lib/store-mode";
 import type { Order } from "@/lib/types";
 
 const schema = z.object({
-  items: z.array(z.object({ slug: z.string().min(1), quantity: z.number().int().min(1).max(20) })).min(1),
+  items: z.array(z.object({ slug: z.string().min(1), variantId: z.string().optional(), quantity: z.number().int().min(1).max(20) })).min(1),
   customer: z.object({
     name: z.string().min(2),
     phone: z.string().min(8),
@@ -35,7 +36,8 @@ export async function POST(request: Request) {
     const items = parsed.data.items.map((item) => {
       const product = catalog.get(item.slug);
       if (!product) throw new Error(`Product not found: ${item.slug}`);
-      return { slug: product.slug, name: product.name, price: product.price, images: product.images, customizable: product.customizable, quantity: item.quantity };
+      const variant = findProductVariant(product, item.variantId);
+      return { key: productVariantKey(product, variant), slug: product.slug, name: product.name, price: product.price, images: [productPrimaryImage(product, variant)], customizable: product.customizable, variantId: variant?.id, variantName: variant?.name, variantColorHex: variant?.colorHex, quantity: item.quantity };
     });
     const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
     const shipping = subtotal >= settings.freeShippingThreshold ? 0 : settings.shippingFee;
@@ -45,7 +47,7 @@ export async function POST(request: Request) {
       const lines = [
         `Hello Print&Gift, I want to inquire about a bulk gift request *${inquiryReference}*.`,
         "",
-        ...items.map((item) => `• ${item.name} × ${item.quantity}`),
+        ...items.map((item) => `• ${item.name}${item.variantName ? ` (${item.variantName})` : ""} × ${item.quantity}`),
         "",
         `Name: ${customer.name}`,
         `Phone: ${customer.phone}`,
@@ -82,7 +84,7 @@ export async function POST(request: Request) {
     const lines = [
       `Hello Print&Gift, I just placed order *${order.orderNumber}*.`,
       "",
-      ...order.items.map((item) => `• ${item.name} × ${item.quantity} — ₹${item.price * item.quantity}`),
+      ...order.items.map((item) => `• ${item.name}${item.variantName ? ` (${item.variantName})` : ""} × ${item.quantity} — ₹${item.price * item.quantity}`),
       "",
       `Subtotal: ₹${order.subtotal}`,
       `Shipping: ${order.shipping ? `₹${order.shipping}` : "Free"}`,

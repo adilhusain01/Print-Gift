@@ -1,11 +1,11 @@
-import type { Order, Product, StoreSettings } from "@/lib/types";
+import type { Category, Order, Product, StoreSettings } from "@/lib/types";
 import { defaultStoreMode } from "@/lib/store-mode";
 
-export const categories = [
-  { name: "Personalized", slug: "personalized", color: "#ff6b6b" },
-  { name: "For Her", slug: "for-her", color: "#ffd166" },
-  { name: "For Him", slug: "for-him", color: "#74c0fc" },
-  { name: "Celebrations", slug: "celebrations", color: "#b197fc" },
+export const demoCategories: Category[] = [
+  { name: "Personalized", slug: "personalized", description: "Names, notes, and custom details made personal.", color: "#7a3e3e", featured: true, active: true },
+  { name: "For Her", slug: "for-her", description: "Soft, useful, and considered gifts.", color: "#9a6b5b", featured: true, active: true },
+  { name: "For Him", slug: "for-him", description: "Clean, practical pieces with lasting use.", color: "#59614a", featured: true, active: true },
+  { name: "Celebrations", slug: "celebrations", description: "Ready pieces for birthdays, milestones, and events.", color: "#8b7a62", featured: true, active: true },
 ];
 
 export const demoProducts: Product[] = [
@@ -109,7 +109,7 @@ export const demoSettings: StoreSettings = {
 export const demoOrders: Order[] = [
   {
     orderNumber: "ORD-260614-A1B2",
-    items: [{ ...demoProducts[0], quantity: 1 }],
+    items: [{ key: demoProducts[0].slug, slug: demoProducts[0].slug, name: demoProducts[0].name, price: demoProducts[0].price, images: demoProducts[0].images, customizable: demoProducts[0].customizable, quantity: 1 }],
     customer: {
       name: "Demo Customer",
       phone: "9999999999",

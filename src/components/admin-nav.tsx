@@ -2,12 +2,12 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { Boxes, LayoutDashboard, LogOut, PackageOpen, Settings } from "lucide-react";
+import { Boxes, LayoutDashboard, ListTree, LogOut, PackageOpen, Settings } from "lucide-react";
 import { BrandLogo } from "@/components/brand-logo";
 import { Button } from "@/components/ui/button";
 import { authClient } from "@/lib/auth-client";
 
-const links = [{ href: "/admin/dashboard", label: "Overview", icon: LayoutDashboard }, { href: "/admin/products", label: "Products", icon: Boxes }, { href: "/admin/orders", label: "Orders", icon: PackageOpen }, { href: "/admin/settings", label: "Settings", icon: Settings }];
+const links = [{ href: "/admin/dashboard", label: "Overview", icon: LayoutDashboard }, { href: "/admin/products", label: "Products", icon: Boxes }, { href: "/admin/categories", label: "Categories", icon: ListTree }, { href: "/admin/orders", label: "Orders", icon: PackageOpen }, { href: "/admin/settings", label: "Settings", icon: Settings }];
 
 export function AdminNav() {
   const pathname = usePathname();

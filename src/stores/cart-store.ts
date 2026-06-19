@@ -2,13 +2,14 @@
 
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import type { CartItem, Product } from "@/lib/types";
+import { productPrimaryImage, productVariantKey } from "@/lib/catalog";
+import type { CartItem, Product, ProductVariant } from "@/lib/types";
 
 type CartState = {
   items: CartItem[];
-  add: (product: Product, quantity?: number) => void;
-  remove: (slug: string) => void;
-  setQuantity: (slug: string, quantity: number) => void;
+  add: (product: Product, quantity?: number, variant?: ProductVariant | null) => void;
+  remove: (key: string) => void;
+  setQuantity: (key: string, quantity: number) => void;
   clear: () => void;
 };
 
@@ -16,16 +17,17 @@ export const useCart = create<CartState>()(
   persist(
     (set) => ({
       items: [],
-      add: (product, quantity = 1) =>
+      add: (product, quantity = 1, variant = null) =>
         set((state) => {
-          const existing = state.items.find((item) => item.slug === product.slug);
+          const key = productVariantKey(product, variant);
+          const existing = state.items.find((item) => item.key === key);
           if (existing) {
-            return { items: state.items.map((item) => item.slug === product.slug ? { ...item, quantity: item.quantity + quantity } : item) };
+            return { items: state.items.map((item) => item.key === key ? { ...item, quantity: item.quantity + quantity } : item) };
           }
-          return { items: [...state.items, { slug: product.slug, name: product.name, price: product.price, images: product.images, customizable: product.customizable, quantity }] };
+          return { items: [...state.items, { key, slug: product.slug, name: product.name, price: product.price, images: [productPrimaryImage(product, variant)], customizable: product.customizable, variantId: variant?.id, variantName: variant?.name, variantColorHex: variant?.colorHex, quantity }] };
         }),
-      remove: (slug) => set((state) => ({ items: state.items.filter((item) => item.slug !== slug) })),
-      setQuantity: (slug, quantity) => set((state) => ({ items: state.items.map((item) => item.slug === slug ? { ...item, quantity: Math.max(1, quantity) } : item) })),
+      remove: (key) => set((state) => ({ items: state.items.filter((item) => item.key !== key) })),
+      setQuantity: (key, quantity) => set((state) => ({ items: state.items.map((item) => item.key === key ? { ...item, quantity: Math.max(1, quantity) } : item) })),
       clear: () => set({ items: [] }),
     }),
     { name: "printngift-cart" },

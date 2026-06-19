@@ -54,8 +54,8 @@ export default async function OrdersPage() {
                 </p>
                 <div className="mt-3 grid gap-2 text-sm">
                   {order.items.map((item) => (
-                    <p key={item.slug} className="break-words">
-                      {item.quantity} × {item.name}
+                    <p key={item.key || item.slug} className="break-words">
+                      {item.quantity} × {item.name}{item.variantName ? ` (${item.variantName})` : ""}
                     </p>
                   ))}
                 </div>

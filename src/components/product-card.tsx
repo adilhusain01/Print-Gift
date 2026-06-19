@@ -5,13 +5,14 @@ import Link from "next/link";
 import { Plus } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
+import { productPrimaryImage } from "@/lib/catalog";
 import { formatPrice } from "@/lib/format";
 import type { StoreMode } from "@/lib/store-mode";
 import { isBulkMode } from "@/lib/store-mode";
 import type { Product } from "@/lib/types";
 import { useCart } from "@/stores/cart-store";
 
-export function ProductCard({ product, storeMode = "retail" }: { product: Product; storeMode?: StoreMode }) {
+export function ProductCard({ product, storeMode = "retail", categoryName }: { product: Product; storeMode?: StoreMode; categoryName?: string }) {
   const add = useCart((state) => state.add);
   const bulkMode = isBulkMode(storeMode);
 
@@ -19,7 +20,7 @@ export function ProductCard({ product, storeMode = "retail" }: { product: Produc
     <article className="group min-w-0">
       <Link href={`/shop/${product.slug}`} className="relative block aspect-[4/4.8] overflow-hidden rounded-lg bg-[#ddd8cd]">
         <Image
-          src={product.images[0]}
+          src={productPrimaryImage(product)}
           alt={product.name}
           fill
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
@@ -42,7 +43,7 @@ export function ProductCard({ product, storeMode = "retail" }: { product: Produc
         </Button>
       </Link>
       <div className="pt-4">
-        <p className="text-sm text-muted-foreground">{product.category.replace("-", " ")}</p>
+        <p className="text-sm text-muted-foreground">{categoryName || product.category.replace("-", " ")}</p>
         <div className="mt-2 flex items-start justify-between gap-4">
           <Link href={`/shop/${product.slug}`} className="font-heading text-2xl leading-tight transition-colors hover:text-accent">{product.name}</Link>
           {bulkMode ? <div className="shrink-0 pt-1 text-sm font-semibold text-muted-foreground">Quote</div> : <div className="shrink-0 pt-1 text-sm font-semibold">{formatPrice(product.price)}</div>}

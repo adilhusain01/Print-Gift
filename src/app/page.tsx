@@ -10,14 +10,14 @@ import {
 import { ProductCard } from "@/components/product-card";
 import { StoreShell } from "@/components/store-shell";
 import { Button } from "@/components/ui/button";
-import { categories } from "@/lib/demo-data";
-import { getProducts, getSettings } from "@/lib/data";
+import { getCategories, getProducts, getSettings } from "@/lib/data";
 import { isBulkMode } from "@/lib/store-mode";
 
 export default async function Home() {
-  const [products, settings] = await Promise.all([getProducts(), getSettings()]);
+  const [products, settings, categories] = await Promise.all([getProducts(), getSettings(), getCategories()]);
   const bulkMode = isBulkMode(settings.storeMode);
   const featured = products.filter((product) => product.featured).slice(0, 4);
+  const categoryNames = new Map(categories.map((category) => [category.slug, category.name]));
 
   return (
     <StoreShell>
@@ -128,12 +128,13 @@ export default async function Home() {
           </Link>
         </div>
         <div className="grid gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
-          {categories.map((category) => (
+          {categories.filter((category) => category.featured).slice(0, 4).map((category) => (
             <Link
               href={`/shop?category=${category.slug}`}
               key={category.slug}
               className="group min-h-64 bg-card p-7 transition-colors hover:bg-[#eeebe3]"
             >
+              <span className="block size-3 rounded-full" style={{ backgroundColor: category.color || "#59614a" }} />
               <div className="mt-24 flex items-end justify-between gap-4">
                 <h3 className="font-heading text-3xl leading-none">
                   {category.name}
@@ -158,7 +159,7 @@ export default async function Home() {
           </div>
           <div className="grid grid-cols-1 gap-x-5 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
             {featured.map((product) => (
-              <ProductCard key={product.slug} product={product} storeMode={settings.storeMode} />
+              <ProductCard key={product.slug} product={product} storeMode={settings.storeMode} categoryName={categoryNames.get(product.category)} />
             ))}
           </div>
         </div>

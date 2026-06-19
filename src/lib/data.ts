@@ -1,8 +1,8 @@
 import { ObjectId } from "mongodb";
 import { cache } from "react";
-import { demoOrders, demoProducts, demoSettings } from "@/lib/demo-data";
+import { demoCategories, demoOrders, demoProducts, demoSettings } from "@/lib/demo-data";
 import { getDb, hasDatabase } from "@/lib/mongodb";
-import type { Order, Product, StoreSettings } from "@/lib/types";
+import type { Category, Order, Product, StoreSettings } from "@/lib/types";
 
 function serialize<T>(value: T): T {
   return JSON.parse(JSON.stringify(value)) as T;
@@ -50,6 +50,25 @@ export const getSettings = cache(async (): Promise<StoreSettings> => {
   }
 });
 
+export const getCategories = cache(async (): Promise<Category[]> => {
+  if (!hasDatabase()) return demoCategories;
+  try {
+    const db = await getDb();
+    const categories = await db.collection<Category>("categories").find({ active: true }).sort({ featured: -1, name: 1 }).toArray();
+    return categories.length ? serialize(categories) : demoCategories;
+  } catch (error) {
+    console.error("Falling back to demo categories", error);
+    return demoCategories;
+  }
+});
+
+export const getAllCategories = cache(async (): Promise<Category[]> => {
+  if (!hasDatabase()) return demoCategories;
+  const db = await getDb();
+  const categories = await db.collection<Category>("categories").find().sort({ featured: -1, name: 1 }).toArray();
+  return categories.length ? serialize(categories) : demoCategories;
+});
+
 export const getOrders = cache(async (): Promise<Order[]> => {
   if (!hasDatabase()) return demoOrders;
   const db = await getDb();
@@ -65,6 +84,18 @@ export async function saveProduct(product: Product) {
     await db.collection<Product>("products").updateOne({ _id: new ObjectId(_id) } as never, { $set: data });
   } else {
     await db.collection<Product>("products").insertOne(payload);
+  }
+}
+
+export async function saveCategory(category: Category) {
+  const db = await getDb();
+  const now = new Date().toISOString();
+  const payload = { ...category, updatedAt: now, createdAt: category.createdAt || now };
+  if (category._id) {
+    const { _id, ...data } = payload;
+    await db.collection<Category>("categories").updateOne({ _id: new ObjectId(_id) } as never, { $set: data });
+  } else {
+    await db.collection<Category>("categories").updateOne({ slug: category.slug }, { $set: payload }, { upsert: true });
   }
 }
 

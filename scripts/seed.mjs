@@ -12,10 +12,19 @@ const products = [
   { slug: "celebration-mini-hamper", name: "Celebration Mini Hamper", shortDescription: "Small in size, properly celebratory in spirit.", description: "An easy crowd-pleaser with sweet treats, confetti details, and your handwritten note.", price: 999, category: "celebrations", images: ["https://images.unsplash.com/photo-1607082349566-187342175e2f?auto=format&fit=crop&w=1200&q=85"], tags: ["quick-gift", "birthday"], featured: false, active: true, customizable: true, stock: 25 },
 ];
 
+const categories = [
+  { name: "Personalized", slug: "personalized", description: "Names, notes, and custom details made personal.", color: "#7a3e3e", featured: true, active: true },
+  { name: "For Her", slug: "for-her", description: "Soft, useful, and considered gifts.", color: "#9a6b5b", featured: true, active: true },
+  { name: "For Him", slug: "for-him", description: "Clean, practical pieces with lasting use.", color: "#59614a", featured: true, active: true },
+  { name: "Celebrations", slug: "celebrations", description: "Ready pieces for birthdays, milestones, and events.", color: "#8b7a62", featured: true, active: true },
+];
+
 const now = new Date().toISOString();
 const storeMode = process.env.NEXT_PUBLIC_STORE_MODE === "bulk" || process.env.STORE_MODE === "bulk" ? "bulk" : "retail";
 await db.collection("products").deleteMany({});
+await db.collection("categories").deleteMany({});
 await db.collection("products").insertMany(products.map((product) => ({ ...product, createdAt: now, updatedAt: now })));
+await db.collection("categories").insertMany(categories.map((category) => ({ ...category, createdAt: now, updatedAt: now })));
 await db.collection("settings").updateOne({ key: "store" }, { $set: { whatsappNumber: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "919999999999", shippingFee: 99, freeShippingThreshold: 1999, announcement: storeMode === "bulk" ? "Bulk gifting quotes are confirmed on WhatsApp" : "Free shipping on orders above ₹1,999", storeMode } }, { upsert: true });
 await client.close();
-console.log(`Seeded ${products.length} products and store settings.`);
+console.log(`Seeded ${products.length} products, ${categories.length} categories, and store settings.`);

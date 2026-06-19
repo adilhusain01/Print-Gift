@@ -36,18 +36,19 @@ export function CartDrawer({ storeMode = "retail" }: { storeMode?: StoreMode }) 
               <Button nativeButton={false} render={<Link href="/shop" />} className="brutal-button mt-5 rounded-full bg-accent px-6 text-accent-foreground hover:bg-[#4d5540]">Explore gifts</Button>
             </div>
           ) : items.map((item) => (
-            <div key={item.slug} className="grid grid-cols-[72px_minmax(0,1fr)] gap-3 border-b border-border py-4 sm:grid-cols-[84px_minmax(0,1fr)] sm:gap-4">
+            <div key={item.key || item.slug} className="grid grid-cols-[72px_minmax(0,1fr)] gap-3 border-b border-border py-4 sm:grid-cols-[84px_minmax(0,1fr)] sm:gap-4">
               <Image src={item.images[0]} alt="" width={84} height={96} className="h-[84px] w-[72px] rounded-md object-cover sm:h-24 sm:w-[84px]" />
               <div className="min-w-0">
                 <div className="flex justify-between gap-2">
                   <Link href={`/shop/${item.slug}`} className="min-w-0 font-heading text-lg leading-tight hover:text-accent sm:text-xl">{item.name}</Link>
-                  <button className="grid size-11 shrink-0 place-items-center text-muted-foreground transition-colors hover:text-destructive" onClick={() => remove(item.slug)} aria-label={`Remove ${item.name}`}><Trash2 className="size-4" /></button>
+                  <button className="grid size-11 shrink-0 place-items-center text-muted-foreground transition-colors hover:text-destructive" onClick={() => remove(item.key || item.slug)} aria-label={`Remove ${item.name}`}><Trash2 className="size-4" /></button>
                 </div>
+                {item.variantName ? <p className="mt-1 flex items-center gap-2 text-xs text-muted-foreground"><span className="size-3 rounded-full border border-black/10" style={{ backgroundColor: item.variantColorHex || "#59614a" }} />{item.variantName}</p> : null}
                 {bulkMode ? <p className="mt-1 text-sm text-muted-foreground">Quote on request</p> : <p className="mt-1 text-sm font-semibold">{formatPrice(item.price)}</p>}
                 <div className="mt-3 inline-flex rounded-full border border-border bg-white">
-                  <button className="grid size-11 place-items-center" onClick={() => setQuantity(item.slug, item.quantity - 1)} aria-label="Decrease quantity"><Minus className="size-3" /></button>
+                  <button className="grid size-11 place-items-center" onClick={() => setQuantity(item.key || item.slug, item.quantity - 1)} aria-label="Decrease quantity"><Minus className="size-3" /></button>
                   <span className="grid h-11 w-9 place-items-center border-x border-border text-xs font-semibold">{item.quantity}</span>
-                  <button className="grid size-11 place-items-center" onClick={() => setQuantity(item.slug, item.quantity + 1)} aria-label="Increase quantity"><Plus className="size-3" /></button>
+                  <button className="grid size-11 place-items-center" onClick={() => setQuantity(item.key || item.slug, item.quantity + 1)} aria-label="Increase quantity"><Plus className="size-3" /></button>
                 </div>
               </div>
             </div>
